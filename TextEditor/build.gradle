@@ -1,0 +1,31 @@
+plugins {
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+repositories {
+  mavenCentral()
+}
+
+javafx {
+  version = '14'
+  modules = ['javafx.controls']
+}
+
+jar {
+  manifest.attributes (
+    'Main-Class': 'test.App'
+  )
+
+  from 'src/dist', { into 'assets' }
+
+  from {
+    configurations.runtimeClasspath.findAll {
+      true
+    }.collect {
+      it.isDirectory() ? it : zipTree(it)
+    }
+  }
+}
+
+mainClassName = 'test.App'

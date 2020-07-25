@@ -1,0 +1,1 @@
+gradlew jar & java -jar build\libs\TextEditor.jar
